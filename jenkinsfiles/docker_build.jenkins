@@ -12,11 +12,13 @@ pipeline {
         timestamps()
     }
     stages {
-        stage("create docker image") {
+        stage("docker login") {
             steps {
-                echo " ============== start building image =================="
-                dir ('docker/toolbox') {
-                	sh 'docker build -t mye/toolbox:latest . '
+                echo " ============== docker login =================="
+                withCredentials([usernamePassword(credentialsId: 'dockerhub_semaev', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh """
+                    docker login -u $USERNAME -p $PASSWORD
+                    """
                 }
             }
         }
