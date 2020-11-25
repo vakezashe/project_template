@@ -14,6 +14,8 @@ pipeline {
         stage("First step") {
             steps {
                 sh 'ssh root@ub1 \'hostname\''
+            }
+            steps {
                 sh 'ssh root@ub1 \'hostname\''
             }
         }
