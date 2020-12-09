@@ -24,7 +24,7 @@ pipeline {
         }
         stage("Third step") {
             steps {
-                sh 'ssh root@ub1 \'docker run hello-world\''
+                sh 'docker run hello-world'
             }
         }
     }
