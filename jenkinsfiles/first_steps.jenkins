@@ -4,7 +4,7 @@ properties([disableConcurrentBuilds()])
 
 pipeline {
     agent {
-        label 'ubuntu18_clone'
+        label 'ansible'
         }
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
@@ -14,21 +14,21 @@ pipeline {
         stage("First step") {
             steps {
                 sh 'hostnamectl'
-                sh 'ssh root@ub2 "hostnamectl"'       
+                sh 'ssh root@ub3 "hostnamectl"'       
                 sh 'last'
-                sh "ssh root@ub2 'last'"
+                sh "ssh root@ub3 'last'"
             }           
         }
         stage("Second step") {
             steps {
                 sh 'uptime'
-                sh 'ssh root@ub2 \'time\''
+                sh 'ssh root@ub3 \'time\''
             }
         }
         stage("Third step") {
             steps {
                 sh 'docker run hello-world'
-                sh 'ssh root@ub2 \'docker run hello-world\''
+                sh 'ssh root@ub3 \'docker run hello-world\''
             }
         }
     }
