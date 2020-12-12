@@ -21,8 +21,8 @@ pipeline {
         }
         stage("Second step") {
             steps {
-                sh 'uptime'
-                sh 'ssh root@ub3 \'time\''
+                sh 'uptime date'
+                sh 'ssh root@ub3 \'uptime date\''
             }
         }
         stage("Third step") {
