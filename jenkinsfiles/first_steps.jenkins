@@ -28,7 +28,7 @@ pipeline {
         stage("Third step") {
             steps {
                 sh 'docker images'
-                sh 'docker images | grep hello-world &&  docker rmi -f $(docker images | grep hello |  awk \'{ print $3 }\')'
+                sh 'docker images | grep hello-world && docker rmi -f $(docker images | grep hello |  awk \'{ print $3 }\')'
                 sh 'docker run hello-world'
                 sh 'ssh root@ub3 \'docker run hello-world\''
                 sh 'ssh root@ub3 \'docker images | grep hello-world &&  docker rmi -f $(docker images | grep hello |  awk \'{ print $3 }\')\''
