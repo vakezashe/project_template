@@ -14,21 +14,21 @@ pipeline {
         stage("First step") {
             steps {
                 sh 'hostnamectl'
-                ssh root@ub2 'hostnamectl'
+                sh 'ssh root@ub2 "hostnamectl"'       
                 sh 'last'
-                ssh root@ub2 'last'
+                sh "ssh root@ub2 'last'"
             }           
         }
         stage("Second step") {
             steps {
                 sh 'uptime'
-                ssh root@ub2 'time'
+                sh 'ssh root@ub2 \'time\''
             }
         }
         stage("Third step") {
             steps {
                 sh 'docker run hello-world'
-                ssh root@ub2 'docker run hello-world'
+                sh 'ssh root@ub2 \'docker run hello-world\''
             }
         }
     }
