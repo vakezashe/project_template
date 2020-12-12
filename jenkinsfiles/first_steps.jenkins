@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage("First step") {
             steps {
-                sh 'docker images | grep hello-world'
+                sh 'docker images | grep hello-worldqwe && $? '
                 sh 'hostnamectl'
                 sh 'ssh root@ub3 "hostnamectl"'       
                 sh 'last'
