@@ -1,0 +1,30 @@
+#!groovy
+pipeline {
+    agent none
+    stages {
+        stage('Parallel Stages') {
+           stage('Parallel Stage 1') {
+               agent {
+                   node {
+                       label 'ansible'
+                       customWorkspace '/tmp/dir1'
+                        }
+                    }
+                    steps {
+                        sh 'pwd'
+                    }
+                }
+                stage('Parallel Stage 2') {
+                    agent {
+                        node {
+                            label 'ubuntu18_clone'
+                            customWorkspace '/tmp/dir2'
+                        }
+                    }
+                    steps {
+                        sh 'pwd'
+                    }
+                }
+            }
+        }
+    }
