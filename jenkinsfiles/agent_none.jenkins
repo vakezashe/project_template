@@ -1,30 +1,27 @@
 #!groovy
+// Run docker build
+properties([disableConcurrentBuilds()])
+
 pipeline {
-    agent none
+    agent {
+        none
+        }
+    triggers { pollSCM('* * * * *') }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
     stages {
-        stage('Parallel Stages') {
-           stage('Parallel Stage 1') {
-               agent {
-                   node {
-                       label 'ansible'
-                       customWorkspace '/tmp/dir1'
-                        }
-                    }
-                    steps {
-                        sh 'pwd'
-                    }
-                }
-                stage('Parallel Stage 2') {
-                    agent {
-                        node {
-                            label 'ubuntu18_clone'
-                            customWorkspace '/tmp/dir2'
-                        }
-                    }
-                    steps {
-                        sh 'pwd'
-                    }
+        stage("First stage") {
+        agent {
+            label 'ansible'
+            customWorkspace '/tmp/dir1'
+            }
+            steps {
+                echo " ============== First step on Ansible =================="
+                sh 'ansible --version'
+                sh 'cat /etc/ansible/hosts'
                 }
             }
         }
-    }
+    }    
