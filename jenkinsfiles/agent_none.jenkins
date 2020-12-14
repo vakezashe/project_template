@@ -1,0 +1,27 @@
+#!groovy
+
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent none
+    triggers { pollSCM('* * * * *') }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    stages {
+        stage("First stage") {
+        agent {
+            node {
+                label 'ansible'
+                customWorkspace '/tmp/dir1'
+                }
+            }
+            steps {
+                echo " ============== First step on Ansible =================="
+                sh 'ansible --version'
+                sh 'cat /etc/ansible/hosts'
+                }
+            }
+        }
+    }
