@@ -4,7 +4,11 @@ properties([disableConcurrentBuilds()])
 
 pipeline {
     agent {
+<<<<<<< HEAD
         label 'master'
+=======
+        label 'ubuntu_docker'
+>>>>>>> 4f0e6f41b78290a916eea2392670179aa2744060
         }
     triggers { pollSCM('* * * * *') }
     options {
@@ -37,4 +41,8 @@ pipeline {
             }
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 4f0e6f41b78290a916eea2392670179aa2744060

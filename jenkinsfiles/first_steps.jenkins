@@ -4,7 +4,7 @@ properties([disableConcurrentBuilds()])
 
 pipeline {
     agent {
-        label 'master'
+        label 'ansible'
         }
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
@@ -13,17 +13,23 @@ pipeline {
     stages {
         stage("First step") {
             steps {
-                sh 'ssh root@ub1 \'hostname\''
-            }
+                sh 'hostnamectl'
+                sh 'ssh root@ub3 "hostnamectl"'       
+                sh 'last'
+                sh "ssh root@ub3 'last'"
+            }           
         }
         stage("Second step") {
             steps {
-                sh 'ssh root@ub1 \'uptime\''
+                sh 'uptime date'
+                sh 'ssh root@ub3 \'uptime date\''
             }
         }
         stage("Third step") {
             steps {
-                sh 'ssh root@ub1 \'docker run hello-world\''
+                sh 'docker images'              
+                sh 'docker run hello-world'
+                sh 'ssh root@ub3 \'docker run hello-world\''
             }
         }
     }
