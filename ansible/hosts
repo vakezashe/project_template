@@ -1,0 +1,7 @@
+[group1]
+test ansible_host=ub1
+
+[group1:vars]
+ansible_user=ansible 
+ansible_port=22
+
