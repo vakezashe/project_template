@@ -14,9 +14,9 @@ pipeline {
         stage("First step") {
             steps {
                 sh 'hostnamectl'
-                sh 'ssh root@ub3 "hostnamectl"'       
+                \\ sh 'ssh root@ub3 "hostnamectl"'       
                 sh 'last'
-                sh "ssh root@ub3 'last'"
+                \\ sh "ssh root@ub3 'last'"
             }           
         }
         stage("Second step") {
