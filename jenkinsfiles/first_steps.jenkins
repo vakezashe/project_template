@@ -28,7 +28,7 @@ pipeline {
         }
         stage("Third step") {
             steps {
-                sh 'apt install docker.io -y'
+                sh 'apt install docker.io -y 2>/dev/null'
                 sh 'docker images'              
                 sh 'docker run hello-world'
                 echo 'ssh root@ub3 \'docker run hello-world\''
